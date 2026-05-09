@@ -35,6 +35,9 @@ class Config:
 
         self.log_level: str = os.getenv("LOG_LEVEL", "INFO").strip().upper()
 
+        raw_history = os.getenv("HISTORY_LIMIT", "").strip()
+        self.history_limit: int = int(raw_history) if raw_history else 20
+
 
 def setup_logging(level: str) -> None:
     logging.basicConfig(

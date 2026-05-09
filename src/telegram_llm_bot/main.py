@@ -22,7 +22,7 @@ async def _run() -> None:
 
     logger.info("Бот запускается, начинаем long polling")
     try:
-        await dp.start_polling(bot, llm_client=llm_client)
+        await dp.start_polling(bot, llm_client=llm_client, config=config)
     finally:
         logger.info("Polling остановлен, закрываем сессию бота")
         await bot.session.close()

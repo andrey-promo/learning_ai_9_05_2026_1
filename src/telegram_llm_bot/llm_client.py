@@ -18,13 +18,15 @@ class LlmClient:
         self._temperature = config.llm_temperature
         self._max_tokens = config.llm_max_tokens
 
-    async def ask(self, user_text: str) -> str:
+    async def ask(self, user_text: str, history: list[dict] | None = None) -> str:
+        messages: list[dict] = [{"role": "system", "content": self._system_prompt}]
+        if history:
+            messages.extend(history)
+        messages.append({"role": "user", "content": user_text})
+
         response = await self._client.chat.completions.create(
             model=self._model,
-            messages=[
-                {"role": "system", "content": self._system_prompt},
-                {"role": "user", "content": user_text},
-            ],
+            messages=messages,
             temperature=self._temperature,
             max_tokens=self._max_tokens,
         )
