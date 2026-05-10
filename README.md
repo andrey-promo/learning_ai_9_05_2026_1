@@ -41,6 +41,25 @@ make docker-build   # собрать образ
 make docker-run     # запустить контейнер
 ```
 
+## Деплой в Railway
+
+1. Зарегистрируйтесь на [railway.app](https://railway.app) и создайте новый проект.
+2. Подключите репозиторий: **New Project → Deploy from GitHub repo**.
+3. В Railway Dashboard → **Variables** добавьте обязательные переменные окружения:
+
+| Переменная | Описание |
+|---|---|
+| `TELEGRAM_BOT_TOKEN` | Токен бота из [@BotFather](https://t.me/BotFather) |
+| `OPENROUTER_API_KEY` | Ключ API с [openrouter.ai](https://openrouter.ai) |
+| `OPENROUTER_MODEL` | Модель, например `openai/gpt-oss-20b:free` |
+| `SYSTEM_PROMPT` | Системный промпт (роль ассистента) |
+
+4. Railway автоматически обнаружит `railway.toml` и `Dockerfile`, соберёт образ и запустит бота.
+5. При каждом `git push` Railway пересобирает образ и перезапускает сервис.
+6. Логи доступны в Railway Dashboard → вкладка **Logs**.
+
+> Открытый порт не нужен — бот работает на long polling без HTTP-сервера.
+
 ## Команды бота
 
 - `/start` — приветствие
