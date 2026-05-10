@@ -47,7 +47,7 @@ async def handle_text(message: Message, llm_client: LlmClient, config: Config) -
         history.append({"role": "assistant", "content": reply})
         await message.answer(reply)
     except Exception as exc:
-        logger.error("Ошибка при обращении к LLM: %s", exc)
+        logger.error("Ошибка при обращении к LLM: %s", exc, exc_info=True)
         await message.answer("Сервис временно недоступен. Попробуйте ещё раз.")
 
 
