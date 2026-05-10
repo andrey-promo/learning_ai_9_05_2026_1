@@ -24,15 +24,23 @@ def _get_history(user_id: int, limit: int) -> deque:
 @router.message(F.chat.type == "private", Command("start"))
 async def cmd_start(message: Message) -> None:
     await message.answer(
-        "Привет! Я бот на базе языковой модели.\n"
-        "Просто напишите мне любое сообщение — и я отвечу."
+        "Привет! Я JTBD-консультант на базе языковой модели.\n\n"
+        "Помогаю находить продуктовые идеи, формулировать job stories, "
+        "выявлять необслуженные работы и желаемые результаты (outcomes).\n\n"
+        "Просто напишите, над чем работаете — и начнём."
     )
 
 
 @router.message(F.chat.type == "private", Command("help"))
 async def cmd_help(message: Message) -> None:
     await message.answer(
-        "Напишите мне текстовое сообщение, и я передам его языковой модели и пришлю ответ."
+        "Я консультирую по методологии Jobs-to-be-Done:\n"
+        "• поиск продуктовых идей\n"
+        "• job stories и job map\n"
+        "• необслуженные работы (underserved jobs)\n"
+        "• желаемые результаты (outcomes)\n\n"
+        "Напишите текстовое сообщение — я задам уточняющие вопросы "
+        "и помогу структурировать мышление."
     )
 
 
